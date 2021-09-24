@@ -9,11 +9,11 @@ interface SingInProps {
     password: string,
     handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    handleSignIn: (e: React.MouseEvent<HTMLButtonElement>) => void
+    handleSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void
 
 }
 
-const SingIn: React.FC<SingInProps> = ({ email, password, handlePassword, handleEmail, handleSignIn }) => {
+const SingIn: React.FC<SingInProps> = ({ email, password, handlePassword, handleEmail, handleSubmit }) => {
   return (
         <Flex border="1px solid #ccc" direction="column" alignItems="center" p={6}>
             <Heading as="h2" mb={10}>
@@ -27,7 +27,7 @@ const SingIn: React.FC<SingInProps> = ({ email, password, handlePassword, handle
                 <Input value={password || ''} onChange={handlePassword} placeholder="Password" type="password"></Input>
                 <FormErrorMessage>Введите пароль</FormErrorMessage>
             </FormControl>
-            <Button onClick={handleSignIn} colorScheme="telegram" _focus={{ boxShadow: 'none' }} isFullWidth>Sign in</Button>
+            <Button onClick={handleSubmit} colorScheme="telegram" _focus={{ boxShadow: 'none' }} isFullWidth>Sign in</Button>
         </Flex>
   )
 }

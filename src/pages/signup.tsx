@@ -1,31 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Flex } from '@chakra-ui/layout'
 import SingUp from '../components/SignUp'
+import { useInput } from '../hooks/useInput'
 
 const signup = () => {
-  const [email, setEmail] = useState<string>(null)
-  const [password, setPassword] = useState<string>(null)
+  const [name, handleName] = useInput(null)
+  const [surname, handleSurname] = useInput(null)
+  const [email, handleEmail] = useInput(null)
+  const [password, handlePassword] = useInput(null)
+  const [role, setRole] = useState('STARTUPER')
+  const buttonDisabled = name && surname && email && password
 
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
-  const handleSignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(email, password)
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(role)
   }
 
   return (
         <Flex h="100vh" alignItems="center" justifyContent="center">
             <SingUp
+              name={name}
+              surname={surname}
               email={email}
               password={password}
+              buttonDisabled={!buttonDisabled}
+              role={role}
+              handleName={handleName}
+              handleSurname={handleSurname}
               handleEmail={handleEmail}
               handlePassword={handlePassword}
-              handleSignIn={handleSignIn}
+              handleSubmit={handleSubmit}
+              handleRole={setRole}
             />
         </Flex>
   )

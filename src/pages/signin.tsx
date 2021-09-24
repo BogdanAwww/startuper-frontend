@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Flex } from '@chakra-ui/layout'
 import SingIn from '../components/SignIn'
+import { useInput } from '../hooks/useInput'
 
 const signin = () => {
-  const [email, setEmail] = useState<string>(null)
-  const [password, setPassword] = useState<string>(null)
+  const [email, handleEmail] = useInput(null)
+  const [password, handlePassword] = useInput(null)
 
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
-  const handleSignIn = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(email, password)
   }
 
@@ -25,7 +18,7 @@ const signin = () => {
               password={password}
               handleEmail={handleEmail}
               handlePassword={handlePassword}
-              handleSignIn={handleSignIn}
+              handleSubmit={handleSubmit}
             />
         </Flex>
   )
