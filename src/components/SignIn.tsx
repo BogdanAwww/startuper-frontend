@@ -7,13 +7,14 @@ import { FormControl, FormErrorMessage } from '@chakra-ui/react'
 interface SingInProps {
     email: string,
     password: string,
+    buttonDisabled: boolean,
     handlePassword: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleEmail: (e: React.ChangeEvent<HTMLInputElement>) => void,
     handleSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void
 
 }
 
-const SingIn: React.FC<SingInProps> = ({ email, password, handlePassword, handleEmail, handleSubmit }) => {
+const SingIn: React.FC<SingInProps> = ({ email, password, buttonDisabled, handlePassword, handleEmail, handleSubmit }) => {
   return (
         <Flex border="1px solid #ccc" direction="column" alignItems="center" p={6}>
             <Heading as="h2" mb={10}>
@@ -27,7 +28,7 @@ const SingIn: React.FC<SingInProps> = ({ email, password, handlePassword, handle
                 <Input value={password || ''} onChange={handlePassword} placeholder="Password" type="password"></Input>
                 <FormErrorMessage>Введите пароль</FormErrorMessage>
             </FormControl>
-            <Button onClick={handleSubmit} colorScheme="telegram" _focus={{ boxShadow: 'none' }} isFullWidth>Sign in</Button>
+            <Button onClick={handleSubmit} isDisabled={buttonDisabled} colorScheme="telegram" _focus={{ boxShadow: 'none' }} isFullWidth>Sign in</Button>
         </Flex>
   )
 }

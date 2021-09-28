@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import App from 'next/app'
 import type { AppProps, AppContext } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
+import { QueryClientProvider, QueryClient } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 function MyApp ({ Component, pageProps }: AppProps) {
+  const queryClient = useRef(new QueryClient())
+
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient.current}>
+        <Component {...pageProps} />
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </ChakraProvider>
   )
 }

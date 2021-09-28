@@ -1,24 +1,37 @@
 import React, { useState } from 'react'
+import Router from 'next/router'
 import { Flex } from '@chakra-ui/layout'
+import { useMutation } from 'react-query'
 import SingUp from '../components/SignUp'
 import { useInput } from '../hooks/useInput'
+import { signUpReq } from '../api/auth'
+import { AuthGSSP } from '../utils/AuthGSSP'
 
 const signup = () => {
-  const [name, handleName] = useInput(null)
+  const [username, handleName] = useInput(null)
   const [surname, handleSurname] = useInput(null)
   const [email, handleEmail] = useInput(null)
   const [password, handlePassword] = useInput(null)
-  const [role, setRole] = useState('STARTUPER')
-  const buttonDisabled = name && surname && email && password
+  const [role, setRole] = useState<'STARTUPER' | 'INVESTOR'>('STARTUPER')
+  const buttonDisabled = username && surname && email && password
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(role)
+  const mutation = useMutation(signUpReq, {
+    onSuccess: () => Router.push('/signin')
+  })
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    mutation.mutate({
+      username,
+      surname,
+      email,
+      password,
+      role
+    })
   }
-
   return (
         <Flex h="100vh" alignItems="center" justifyContent="center">
             <SingUp
-              name={name}
+              username={username}
               surname={surname}
               email={email}
               password={password}
@@ -34,5 +47,7 @@ const signup = () => {
         </Flex>
   )
 }
+
+export const getServerSideProps = AuthGSSP({ cookieCheck: process.env.NEXT_PUBLIC_AUTH_COOKIE_NAME, redirectTo: '/' })
 
 export default signup

@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/button'
 import { FormControl, FormErrorMessage, Radio, RadioGroup } from '@chakra-ui/react'
 
 interface SignUpProps {
-    name: string,
+    username: string,
     surname: string,
     email: string,
     password: string,
@@ -20,14 +20,14 @@ interface SignUpProps {
 
 }
 
-const SignUp: React.FC<SignUpProps> = ({ name, surname, email, password, role, buttonDisabled, handleName, handleSurname, handlePassword, handleEmail, handleSubmit, handleRole }) => {
+const SignUp: React.FC<SignUpProps> = ({ username, surname, email, password, role, buttonDisabled, handleName, handleSurname, handlePassword, handleEmail, handleSubmit, handleRole }) => {
   return (
         <Flex border="1px solid #ccc" direction="column" alignItems="center" p={6}>
             <Heading as="h2" mb={10}>
                 Sign Up
             </Heading>
-            <FormControl id="name" isInvalid={name === ''} isRequired mb={6}>
-                <Input value={name || ''} onChange={handleName} placeholder="Name" type="text"></Input>
+            <FormControl id="name" isInvalid={username === ''} isRequired mb={6}>
+                <Input value={username || ''} onChange={handleName} placeholder="Name" type="text"></Input>
                 <FormErrorMessage>Введите имя</FormErrorMessage>
             </FormControl>
             <FormControl id="surname" isInvalid={surname === ''} isRequired mb={6}>
